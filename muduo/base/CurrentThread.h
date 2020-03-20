@@ -47,6 +47,7 @@ namespace CurrentThread
 
   void sleepUsec(int64_t usec);  // for testing
 
+  // Maybe used for log.
   string stackTrace(bool demangle);
 }  // namespace CurrentThread
 }  // namespace muduo

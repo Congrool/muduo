@@ -27,6 +27,7 @@ class Condition : noncopyable
     MCHECK(pthread_cond_destroy(&pcond_));
   }
 
+  // Wait() should be used between lock() and unlock() of mutex_
   void wait()
   {
     MutexLock::UnassignGuard ug(mutex_);

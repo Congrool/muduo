@@ -28,6 +28,8 @@ class Date : public muduo::copyable
 
   struct YearMonthDay
   {
+    YearMonthDay(YearMonthDay& ymd):year(ymd.year),month(ymd.month),day(ymd.day){}
+    YearMonthDay() = default;
     int year; // [1900..2500]
     int month;  // [1..12]
     int day;  // [1..31]
@@ -75,7 +77,7 @@ class Date : public muduo::copyable
   ///
   string toIsoString() const;
 
-  struct YearMonthDay yearMonthDay() const;
+  YearMonthDay& yearMonthDay() const;
 
   int year() const
   {

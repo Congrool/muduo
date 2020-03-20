@@ -26,7 +26,7 @@ int getJulianDayNumber(int year, int month, int day)
   return day + (153*m + 2) / 5 + y*365 + y/4 - y/100 + y/400 - 32045;
 }
 
-struct Date::YearMonthDay getYearMonthDay(int julianDayNumber)
+Date::YearMonthDay& getYearMonthDay(int julianDayNumber)
 {
   int a = julianDayNumber + 32044;
   int b = (4 * a + 3) / 146097;
@@ -68,7 +68,7 @@ string Date::toIsoString() const
   return buf;
 }
 
-Date::YearMonthDay Date::yearMonthDay() const
+Date::YearMonthDay& Date::yearMonthDay() const
 {
   return getYearMonthDay(julianDayNumber_);
 }

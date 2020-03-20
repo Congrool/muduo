@@ -183,7 +183,11 @@ class CAPABILITY("mutex") MutexLock : noncopyable
    private:
     MutexLock& owner_;
   };
-
+  
+  // FIXME:
+  // unassignHolder and assignHolde are only invorked between lock() and unlock()
+  // Thus, holder_ is in the critical section protected by mutex_
+  // I think it's better to check wether it hs been locked or not in these functions.
   void unassignHolder()
   {
     holder_ = 0;
