@@ -69,7 +69,7 @@ string ProcessInfo::pidString()
 {
   char buf[32];
   snprintf(buf, sizeof buf, "%d", pid());
-  return buf;
+  return string(buf);
 }
 
 uid_t ProcessInfo::uid()
@@ -89,7 +89,7 @@ string ProcessInfo::username()
   {
     name = pwd.pw_name;
   }
-  return name;
+  return string(name);
 }
 
 uid_t ProcessInfo::euid()

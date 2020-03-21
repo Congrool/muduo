@@ -11,6 +11,7 @@ namespace muduo
 
 Exception::Exception(string msg)
   : message_(std::move(msg)),
+  // Why stack doesn't use std::move?
     stack_(CurrentThread::stackTrace(/*demangle=*/false))
 {
 }

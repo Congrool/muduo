@@ -78,7 +78,10 @@ FileUtil::ReadSmallFile::~ReadSmallFile()
 {
   if (fd_ >= 0)
   {
-    ::close(fd_); // FIXME: check EINTR
+    // Simply using a loop to handle EINTR
+    // Maybe use a counter to avoid endless loop can be better
+    int ret = 0;
+    while((ret = ::close(fd_)) == EINTR); // FIXME: check EINTR
   }
 }
 
@@ -104,11 +107,13 @@ int FileUtil::ReadSmallFile::readToString(int maxSize,
       {
         if (S_ISREG(statbuf.st_mode))
         {
+          // fd_ refers to a regular file
           *fileSize = statbuf.st_size;
           content->reserve(static_cast<int>(std::min(implicit_cast<int64_t>(maxSize), *fileSize)));
         }
         else if (S_ISDIR(statbuf.st_mode))
         {
+          // fd_ refers to a dir
           err = EISDIR;
         }
         if (modifyTime)
