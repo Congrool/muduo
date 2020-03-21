@@ -1,27 +1,15 @@
 #include <type_traits>
 #include <iostream>
+#include <string>
+using namespace std;
 
-class base{
-    public:
-        base(){
-            std::cout << "constructor" << std::endl;
-        }
-        base(const base&){
-            std::cout << "constructor" << std::endl;
-        }
+string f1(){
+    char buf[32] = "fff";
+    return buf;
+}
 
-        base& fun(){
-            base b;
-            return b;
-        }
 
-        base& fun2(){
-            std::cout << "if constructor invoked here?" << std::endl;
-            return fun();
-        }
-};
+
 int main(){
-    base b;
-    std::cout << "start here" << std::endl;
-    b.fun2();
+
 }
