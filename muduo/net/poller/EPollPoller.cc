@@ -92,6 +92,9 @@ void EPollPoller::fillActiveChannels(int numEvents,
   assert(implicit_cast<size_t>(numEvents) <= events_.size());
   for (int i = 0; i < numEvents; ++i)
   {
+    // What does the statement mean ?
+    // Why can event_data.ptr be converted to channel* ?
+    // What does the epoll_data_t.ptr point to ? 
     Channel* channel = static_cast<Channel*>(events_[i].data.ptr);
 #ifndef NDEBUG
     int fd = channel->fd();

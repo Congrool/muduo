@@ -62,6 +62,7 @@ class EventLoop : noncopyable
   ///
   Timestamp pollReturnTime() const { return pollReturnTime_; }
 
+  // How to use iteration_ ?
   int64_t iteration() const { return iteration_; }
 
   /// Runs callback immediately in the loop thread.
