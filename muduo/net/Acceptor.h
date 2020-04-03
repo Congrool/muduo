@@ -32,6 +32,8 @@ class Acceptor : noncopyable
  public:
   typedef std::function<void (int sockfd, const InetAddress&)> NewConnectionCallback;
 
+  // The only function of loop in Acceptor is check
+  // whether Acceptor is run in the thread which constructed the loop
   Acceptor(EventLoop* loop, const InetAddress& listenAddr, bool reuseport);
   ~Acceptor();
 

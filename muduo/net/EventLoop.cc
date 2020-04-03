@@ -68,6 +68,7 @@ EventLoop::EventLoop()
     callingPendingFunctors_(false),
     iteration_(0),
     threadId_(CurrentThread::tid()),
+    // default poller is EPollPoller according to getenv("MUDUO_USE_POLL")
     poller_(Poller::newDefaultPoller(this)),
     timerQueue_(new TimerQueue(this)),
     wakeupFd_(createEventfd()),
@@ -117,7 +118,7 @@ void EventLoop::loop()
     {
       printActiveChannels();
     }
-    // TODO sort channel by priority
+    // TODO: sort channel by priority
     eventHandling_ = true;
     for (Channel* channel : activeChannels_)
     {
@@ -126,6 +127,7 @@ void EventLoop::loop()
     }
     currentActiveChannel_ = NULL;
     eventHandling_ = false;
+    // do event which is not owned by the current thread
     doPendingFunctors();
   }
 

@@ -25,6 +25,9 @@ using namespace muduo::net;
 Acceptor::Acceptor(EventLoop* loop, const InetAddress& listenAddr, bool reuseport)
   : loop_(loop),
     acceptSocket_(sockets::createNonblockingOrDie(listenAddr.family())),
+    // FIXME:
+    // The order of initializaion is according to the order of definition
+    // of acceptSocket and acceptChannel. Maybe it isn't a good idea.
     acceptChannel_(loop, acceptSocket_.fd()),
     listenning_(false),
     idleFd_(::open("/dev/null", O_RDONLY | O_CLOEXEC))
@@ -56,7 +59,7 @@ void Acceptor::handleRead()
 {
   loop_->assertInLoopThread();
   InetAddress peerAddr;
-  //FIXME loop until no more
+  //FIXME: loop until no more
   int connfd = acceptSocket_.accept(&peerAddr);
   if (connfd >= 0)
   {

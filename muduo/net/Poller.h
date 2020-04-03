@@ -38,6 +38,10 @@ class Poller : noncopyable
 
   /// Polls the I/O events.
   /// Must be called in the loop thread.
+  // @para timeoutMs      wait time in ms
+  // @para activeChannels events to poll
+  // @ret  time after completation of poll(system call, not poll(int, ChannelList*))
+  // Available channels will be in activeChannels after poll(int,ChannelList*)
   virtual Timestamp poll(int timeoutMs, ChannelList* activeChannels) = 0;
 
   /// Changes the interested I/O events.

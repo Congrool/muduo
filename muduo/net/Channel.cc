@@ -43,7 +43,7 @@ Channel::~Channel()
     assert(!loop_->hasChannel(this));
   }
 }
-
+// Where tie is used ?
 void Channel::tie(const std::shared_ptr<void>& obj)
 {
   tie_ = obj;
